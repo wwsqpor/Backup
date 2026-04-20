@@ -138,5 +138,6 @@ CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
     "https://backup-cyan-one.vercel.app",
-    "https://phone-sale-bjfl713ij-cherepkovanatalya45-1557s-projects.vercel.app"
+    "https://phone-sale-bjfl713ij-cherepkovanatalya45-1557s-projects.vercel.app",
+    "https://backup-production-d894.up.railway.app",
 ]
