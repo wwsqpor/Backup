@@ -1,0 +1,65 @@
+<div class="home">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">✨ Best Deals on Smartphones</div>
+      <h1 class="hero-title">Find Your<br><span class="gradient-text">Perfect Phone</span></h1>
+      <p class="hero-subtitle">Explore the latest smartphones from top brands at unbeatable prices. Fast shipping, easy returns.</p>
+      <div class="hero-actions">
+        <a routerLink="/phones" class="btn-primary">Shop Now →</a>
+        <a routerLink="/phones" [queryParams]="{category: 1}" class="btn-secondary">View Flagships</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="phone-mockup">📱</div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Shop by Category</h2>
+      <div class="categories-grid">
+        @for (cat of categories; track cat.id) {
+          <a [routerLink]="['/phones']" [queryParams]="{category: cat.id}" class="category-card">
+            <div class="cat-icon">📂</div>
+            <div class="cat-name">{{ cat.name }}</div>
+            <div class="cat-count">{{ cat.phone_count }} phones</div>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Phones -->
+  <section class="section featured">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Featured Phones</h2>
+        <a routerLink="/phones" class="see-all">See all →</a>
+      </div>
+      @if (loading) {
+        <div class="loading-grid">
+          @for (i of [1,2,3,4]; track i) {
+            <div class="skeleton-card"></div>
+          }
+        </div>
+      } @else {
+        <div class="phones-grid">
+          @for (phone of featuredPhones; track phone.id) {
+            <a [routerLink]="['/phones', phone.id]" class="phone-card">
+              <div class="phone-img-wrapper">
+                <img [src]="phone.image_url" [alt]="phone.name" class="phone-img" onerror="this.src='https://via.placeholder.com/300x300?text=Phone'">
+              </div>
+              <div class="phone-info">
+                <div class="phone-brand">{{ phone.brand }}</div>
+                <div class="phone-name">{{ phone.name }}</div>
+                <div class="phone-price">${{ phone.price }}</div>
+              </div>
+            </a>
+          }
+        </div>
+      }
+    </div>
+  </section>
+</div>

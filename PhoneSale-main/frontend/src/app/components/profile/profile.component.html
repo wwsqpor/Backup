@@ -1,0 +1,26 @@
+<div class="profile-page">
+  <div class="container">
+    <h1>My Profile</h1>
+    @if (user) {
+      <div class="profile-card">
+        <div class="avatar">{{ user.username[0].toUpperCase() }}</div>
+        <div class="user-info">
+          <h2>{{ user.username }}</h2>
+          <p class="email">{{ user.email }}</p>
+          <p class="joined">Member since {{ user.date_joined | date:'longDate' }}</p>
+        </div>
+      </div>
+      <div class="profile-details">
+        <div class="detail-row"><span class="detail-label">Username</span><span>{{ user.username }}</span></div>
+        <div class="detail-row"><span class="detail-label">Email</span><span>{{ user.email }}</span></div>
+        <div class="detail-row"><span class="detail-label">First Name</span><span>{{ user.first_name || '—' }}</span></div>
+        <div class="detail-row"><span class="detail-label">Last Name</span><span>{{ user.last_name || '—' }}</span></div>
+      </div>
+      <div class="profile-actions">
+        <a routerLink="/orders" class="btn-secondary">📦 My Orders</a>
+        <a routerLink="/cart" class="btn-secondary">🛒 My Cart</a>
+        <button (click)="logout()" class="btn-logout">Logout</button>
+      </div>
+    }
+  </div>
+</div>

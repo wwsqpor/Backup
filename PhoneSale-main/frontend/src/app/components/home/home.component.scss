@@ -1,0 +1,73 @@
+.home { background: #0a0a0f; min-height: 100vh; color: #fff; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.gradient-text { background: linear-gradient(135deg, #6366f1, #a78bfa, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.hero {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 80vh; max-width: 1200px; margin: 0 auto; padding: 80px 24px;
+  gap: 60px;
+}
+.hero-badge {
+  display: inline-block; background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3);
+  color: #a78bfa; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;
+}
+.hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin: 0 0 20px; letter-spacing: -2px; }
+.hero-subtitle { color: rgba(255,255,255,0.55); font-size: 1.1rem; line-height: 1.7; max-width: 480px; margin-bottom: 36px; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  &:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(99,102,241,0.4); }
+}
+.btn-secondary {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+  color: #fff; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 600;
+  transition: all 0.2s;
+  &:hover { background: rgba(255,255,255,0.1); }
+}
+.hero-visual { flex-shrink: 0; }
+.phone-mockup {
+  font-size: 12rem; filter: drop-shadow(0 0 80px rgba(99,102,241,0.3));
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+.section { padding: 80px 0; }
+.featured { background: rgba(255,255,255,0.02); }
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; }
+.section-title { font-size: 2rem; font-weight: 800; letter-spacing: -1px; margin: 0 0 40px; }
+.see-all { color: #6366f1; text-decoration: none; font-weight: 600; &:hover { text-decoration: underline; } }
+
+.categories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.category-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 28px 20px; text-align: center; text-decoration: none; color: #fff;
+  transition: all 0.2s;
+  &:hover { background: rgba(99,102,241,0.1); border-color: rgba(99,102,241,0.4); transform: translateY(-4px); }
+}
+.cat-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.cat-name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+.cat-count { color: rgba(255,255,255,0.45); font-size: 0.85rem; }
+
+.phones-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+.phone-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; overflow: hidden; text-decoration: none; color: #fff;
+  transition: all 0.25s;
+  &:hover { transform: translateY(-6px); border-color: rgba(99,102,241,0.4); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+}
+.phone-img-wrapper { aspect-ratio: 1; overflow: hidden; background: rgba(255,255,255,0.03); }
+.phone-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.phone-card:hover .phone-img { transform: scale(1.05); }
+.phone-info { padding: 16px; }
+.phone-brand { color: #6366f1; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.phone-name { font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; }
+.phone-price { font-size: 1.2rem; font-weight: 800; color: #a78bfa; }
+
+.loading-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+.skeleton-card {
+  background: rgba(255,255,255,0.05); border-radius: 16px; height: 320px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }

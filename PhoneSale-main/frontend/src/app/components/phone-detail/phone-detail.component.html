@@ -1,0 +1,63 @@
+<div class="detail-page">
+  <div class="container">
+    <a routerLink="/phones" class="back-link">← Back to Phones</a>
+
+    @if (loading) {
+      <div class="loading-state">Loading phone details...</div>
+    } @else if (error) {
+      <div class="alert-error">{{ error }}</div>
+    } @else if (phone) {
+      @if (successMsg) {
+        <div class="alert-success">✓ {{ successMsg }}</div>
+      }
+      <div class="detail-layout">
+        <!-- Image -->
+        <div class="image-section">
+          <div class="image-wrapper">
+            <img [src]="phone.image_url" [alt]="phone.name" class="phone-image" onerror="this.src='https://via.placeholder.com/500x500?text=📱'">
+          </div>
+          <div class="specs-card">
+            <h3>Specifications</h3>
+            <div class="spec-list">
+              <div class="spec-item"><span class="spec-label">RAM</span><span class="spec-val">{{ phone.ram }}</span></div>
+              <div class="spec-item"><span class="spec-label">Storage</span><span class="spec-val">{{ phone.storage }}</span></div>
+              <div class="spec-item"><span class="spec-label">Battery</span><span class="spec-val">{{ phone.battery }}</span></div>
+              <div class="spec-item"><span class="spec-label">Camera</span><span class="spec-val">{{ phone.camera }}</span></div>
+              <div class="spec-item"><span class="spec-label">Category</span><span class="spec-val">{{ phone.category_name }}</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info -->
+        <div class="info-section">
+          <div class="phone-brand">{{ phone.brand }}</div>
+          <h1 class="phone-name">{{ phone.name }}</h1>
+          <div class="phone-model">Model: {{ phone.model }}</div>
+          <div class="phone-price">${{ phone.price }}</div>
+          <p class="phone-description">{{ phone.description }}</p>
+
+          <div class="stock-badge" [class.out]="phone.stock === 0">
+            {{ phone.stock > 0 ? '✓ In Stock (' + phone.stock + ' available)' : '✗ Out of Stock' }}
+          </div>
+
+          @if (phone.stock > 0) {
+            <div class="purchase-section">
+              <div class="quantity-control">
+                <button (click)="decrement()" class="qty-btn">−</button>
+                <span class="qty-display">{{ quantity }}</span>
+                <button (click)="increment()" class="qty-btn">+</button>
+              </div>
+              <button (click)="addToCart()" class="btn-add-cart">
+                🛒 Add to Cart
+              </button>
+            </div>
+          }
+
+          @if (!authService.isLoggedIn()) {
+            <p class="login-hint"><a routerLink="/login">Login</a> to add items to your cart.</p>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

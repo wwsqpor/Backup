@@ -1,0 +1,103 @@
+<div class="phones-page">
+  <div class="container">
+    <div class="page-header">
+      <h1>All Phones</h1>
+      <p class="subtitle">{{ phones.length }} phones available</p>
+    </div>
+
+    @if (successMsg) {
+      <div class="alert-success">✓ {{ successMsg }}</div>
+    }
+    @if (error) {
+      <div class="alert-error">⚠ {{ error }}</div>
+    }
+
+    <!-- Filters (4 form controls with ngModel) -->
+    <div class="filters-card">
+      <div class="filter-row">
+        <div class="filter-group">
+          <label>Search</label>
+          <input [(ngModel)]="searchQuery" type="text" placeholder="Search phones..." class="filter-input" (keyup.enter)="onSearch()">
+        </div>
+        <div class="filter-group">
+          <label>Brand</label>
+          <select [(ngModel)]="selectedBrand" class="filter-input">
+            <option value="">All Brands</option>
+            @for (brand of brands; track brand) {
+              <option [value]="brand">{{ brand }}</option>
+            }
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Min Price ($)</label>
+          <input [(ngModel)]="minPrice" type="number" placeholder="0" class="filter-input">
+        </div>
+        <div class="filter-group">
+          <label>Max Price ($)</label>
+          <input [(ngModel)]="maxPrice" type="number" placeholder="9999" class="filter-input">
+        </div>
+        <div class="filter-actions">
+          <button (click)="onSearch()" class="btn-search">Search</button>
+          <button (click)="onReset()" class="btn-reset">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category chips -->
+    <div class="category-chips">
+      <button (click)="filterByCategory(null)" [class.active]="!selectedCategory" class="chip">All</button>
+      @for (cat of categories; track cat.id) {
+        <button (click)="filterByCategory(cat.id)" [class.active]="selectedCategory === cat.id" class="chip">
+          {{ cat.name }}
+        </button>
+      }
+    </div>
+
+    <!-- Phones Grid -->
+    @if (loading) {
+      <div class="phones-grid">
+        @for (i of [1,2,3,4,5,6]; track i) {
+          <div class="skeleton-card"></div>
+        }
+      </div>
+    } @else if (phones.length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <h3>No phones found</h3>
+        <p>Try adjusting your search filters</p>
+        <button (click)="onReset()" class="btn-search">Clear Filters</button>
+      </div>
+    } @else {
+      <div class="phones-grid">
+        @for (phone of phones; track phone.id) {
+          <div class="phone-card">
+            <a [routerLink]="['/phones', phone.id]" class="card-link">
+              <div class="phone-img-wrapper">
+                <img [src]="phone.image_url" [alt]="phone.name" class="phone-img" onerror="this.src='https://via.placeholder.com/300x300?text=📱'">
+                <div class="phone-badge">{{ phone.category_name }}</div>
+              </div>
+              <div class="phone-info">
+                <div class="phone-brand">{{ phone.brand }}</div>
+                <div class="phone-name">{{ phone.name }}</div>
+                <div class="phone-specs">
+                  <span>{{ phone.ram }}</span>
+                  <span>{{ phone.storage }}</span>
+                  <span>{{ phone.camera }}</span>
+                </div>
+                <div class="phone-price">${{ phone.price }}</div>
+              </div>
+            </a>
+            <div class="card-footer">
+              <div class="stock-info" [class.low]="phone.stock < 10">
+                {{ phone.stock > 0 ? 'In stock (' + phone.stock + ')' : 'Out of stock' }}
+              </div>
+              <button (click)="addToCart(phone, $event)" class="btn-cart" [disabled]="phone.stock === 0">
+                {{ phone.stock > 0 ? 'Add to Cart' : 'Sold Out' }}
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
