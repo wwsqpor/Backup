@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-local-dev-key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'backup-production-d894.up.railway.app').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -96,10 +96,10 @@ AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 if AWS_ACCESS_KEY_ID:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_BUCKET_NAME')
-    AWS_S3_ENDPOINT_URL = os.environ.get('AWS_ENDPOINT_URL')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL')
     AWS_S3_FILE_OVERWRITE = False
-    MEDIA_URL = f"{os.environ.get('AWS_ENDPOINT_URL')}/{os.environ.get('AWS_BUCKET_NAME')}/"
+    MEDIA_URL = f"{os.environ.get('AWS_S3_ENDPOINT_URL')}/{os.environ.get('AWS_STORAGE_BUCKET_NAME')}/"
 else:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
@@ -135,3 +135,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://backup-cyan-one.vercel.app",
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://backup-cyan-one.vercel.app",
+    "https://phone-sale-bjfl713ij-cherepkovanatalya45-1557s-projects.vercel.app"
+]
