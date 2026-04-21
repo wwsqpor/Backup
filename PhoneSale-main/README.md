@@ -1,4 +1,4 @@
-📱 PhoneShop
+PhoneShop
 
 A simple full-stack phone e-commerce application built with Angular and Django REST Framework.
 
